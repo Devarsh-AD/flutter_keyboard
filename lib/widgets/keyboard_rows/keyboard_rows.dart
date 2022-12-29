@@ -1,13 +1,17 @@
+import 'dart:developer';
+
+import 'package:flut_keyboard/Bloc/bloc/key_board_bloc.dart';
 import 'package:flut_keyboard/constants/keyString.dart';
 import 'package:flut_keyboard/widgets/keys/custom_key.dart';
 import 'package:flut_keyboard/widgets/keys/key_with_raster.dart';
 import 'package:flut_keyboard/widgets/keys/keys.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FifthRow extends StatelessWidget {
-  const FifthRow({
-    Key? key,
-  }) : super(key: key);
+  Function(String) getPressedKey;
+
+  FifthRow({required this.getPressedKey});
 
   @override
   Widget build(BuildContext context) {
@@ -20,23 +24,25 @@ class FifthRow extends StatelessWidget {
           customWidth: 50,
           keys: 'CTRL',
         ),
-      IconKeys(
-        shouldVisible: true,
-        customWidth: 30,
-        customHeight: 30,
-      ),
+        IconKeys(
+          shouldVisible: true,
+          customWidth: 30,
+          customHeight: 30,
+        ),
         CustomKey(
           shouldVisible: true,
           fSize: 15,
           customWidth: 40,
           keys: 'ALT',
         ),
-       
-        CustomKey(
-          shouldVisible: true,
-          fSize: 15,
-          customWidth: 95,
-          keys: '',
+        GestureDetector(
+          onTap: () => getPressedKey(' '),
+          child: CustomKey(
+            shouldVisible: true,
+            fSize: 15,
+            customWidth: 95,
+            keys: '',
+          ),
         ),
         CustomKey(
           shouldVisible: true,
@@ -67,9 +73,9 @@ class FifthRow extends StatelessWidget {
 }
 
 class FourthRow extends StatelessWidget {
-  const FourthRow({
-    Key? key,
-  }) : super(key: key);
+  Function(String) getPressedKey;
+
+  FourthRow({required this.getPressedKey});
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +94,7 @@ class FourthRow extends StatelessWidget {
           flex: 65,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: getKey(lnFour),
+            children: getKey(lnFour, (s) => getPressedKey(s)),
           ),
         ),
         Expanded(
@@ -106,9 +112,9 @@ class FourthRow extends StatelessWidget {
 }
 
 class FirstRow extends StatelessWidget {
-  const FirstRow({
-    Key? key,
-  }) : super(key: key);
+  Function(String) getPressedKey;
+
+  FirstRow({required this.getPressedKey});
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +124,17 @@ class FirstRow extends StatelessWidget {
         Expanded(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: getKey(lnOne),
+            children: getKey(lnOne, (s) => getPressedKey(s)),
+          ),
+        ),
+        GestureDetector(
+          onTap: () =>
+              BlocProvider.of<KeyBoardBloc>(context).add(RemoveString()),
+          child: CustomKey(
+            shouldVisible: true,
+            fSize: 15,
+            customWidth: 25,
+            keys: '←',
           ),
         ),
       ],
@@ -127,9 +143,9 @@ class FirstRow extends StatelessWidget {
 }
 
 class SecondRow extends StatelessWidget {
-  const SecondRow({
-    Key? key,
-  }) : super(key: key);
+  Function(String) getPressedKey;
+
+  SecondRow({required this.getPressedKey});
 
   @override
   Widget build(BuildContext context) {
@@ -137,18 +153,21 @@ class SecondRow extends StatelessWidget {
       children: [
         Expanded(
           flex: 10,
-          child: CustomKey(
-            shouldVisible: true,
-            fSize: 15,
-            customWidth: 48,
-            keys: 'TAB',
+          child: GestureDetector(
+            onTap: () => getPressedKey('  '),
+            child: CustomKey(
+              shouldVisible: true,
+              fSize: 15,
+              customWidth: 48,
+              keys: 'TAB',
+            ),
           ),
         ),
         Expanded(
           flex: 60,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: getKey(lnTwo),
+            children: getKey(lnTwo, (s) => getPressedKey(s)),
           ),
         ),
         Expanded(
@@ -165,29 +184,41 @@ class SecondRow extends StatelessWidget {
   }
 }
 
-class ThirdRow extends StatelessWidget {
-  const ThirdRow({
-    Key? key,
-  }) : super(key: key);
+class ThirdRow extends StatefulWidget {
+  Function(String) getPressedKey;
+  ThirdRow({required this.getPressedKey});
 
+  @override
+  State<ThirdRow> createState() => _ThirdRowState();
+}
+
+class _ThirdRowState extends State<ThirdRow> {
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
           flex: 10,
-          child: CustomKey(
-            shouldVisible: true,
-            fSize: 13,
-            customWidth: 45,
-            keys: 'CAPS',
+          child: GestureDetector(
+            onTap: () => {
+              log('caaps ${CommomManager.isCapsLock}'),
+              !CommomManager.isCapsLock,
+              setState(() {}),
+              log('caaps ${CommomManager.isCapsLock}'),
+            },
+            child: CustomKey(
+              shouldVisible: true,
+              fSize: 13,
+              customWidth: 45,
+              keys: 'CAPS',
+            ),
           ),
         ),
         Expanded(
           flex: 78,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: getKey(lnThree),
+            children: getKey(lnThree, (s) => widget.getPressedKey(s)),
           ),
         ),
         Expanded(
@@ -204,15 +235,21 @@ class ThirdRow extends StatelessWidget {
   }
 }
 
-  List<Widget> getKey(List<String> keys) {
-    List<Widget> keyWidget = [];
-    for (String i in keys) {
+List<Widget> getKey(List<String> keys, Function(String) getPressedKey) {
+  List<Widget> keyWidget = [];
+  for (String i in keys) {
     keyWidget.add(GestureDetector(
-      // onTap: () => getPressedKey(i),
+      onTap: () => {
+        log('caaps ${CommomManager.isCapsLock}'),
+        if (CommomManager.isCapsLock)
+          {getPressedKey(i)}
+        else
+          {getPressedKey(i.toLowerCase())}
+      },
       child: MyKey(
         keys: i,
       ),
-      ));
-    }
-    return keyWidget;
+    ));
   }
+  return keyWidget;
+}

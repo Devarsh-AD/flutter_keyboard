@@ -3,7 +3,9 @@ import 'package:flut_keyboard/widgets/preffredSized_box/perfredSize_box.dart';
 import 'package:flutter/material.dart';
 
 class FlutterKeyboard extends StatefulWidget {
-  const FlutterKeyboard({super.key});
+  Function(String) getPressedKey;
+
+  FlutterKeyboard({required this.getPressedKey});
 
   @override
   State<FlutterKeyboard> createState() => _FlutterKeyboardState();
@@ -14,15 +16,15 @@ class _FlutterKeyboardState extends State<FlutterKeyboard> {
   Widget build(BuildContext context) {
     return Stack(children: [
       Container(
-        color: Color.fromARGB(255, 85, 83, 83),
+        color: const Color.fromARGB(255, 85, 83, 83),
         child: Column(
           children: [
             customSizedBox(5, 0),
-            FirstRow(),
-            SecondRow(),
-            ThirdRow(),
-            FourthRow(),
-            FifthRow()
+            FirstRow(getPressedKey: (s) => widget.getPressedKey(s)),
+            SecondRow(getPressedKey: (s) => widget.getPressedKey(s)),
+            ThirdRow(getPressedKey: (s) => widget.getPressedKey(s)),
+            FourthRow(getPressedKey: (s) => widget.getPressedKey(s)),
+            FifthRow(getPressedKey: (s) => widget.getPressedKey(s))
           ],
         ),
       ),
@@ -32,7 +34,7 @@ class _FlutterKeyboardState extends State<FlutterKeyboard> {
           child: Container(
             height: 20,
             width: 37,
-            color: Color.fromARGB(255, 63, 216, 236),
+            color: const Color.fromARGB(255, 63, 216, 236),
           ))
     ]);
   }
