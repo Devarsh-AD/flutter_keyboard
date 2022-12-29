@@ -47,7 +47,7 @@ class _HomeState extends State<Home> {
         ),
         FlutterKeyboard(
             getPressedKey: (s) => {
-                  if (CommomManager.isCapsLockOff)
+                  if (CommonManager.isCapsLockOff)
                     {
                       keyBoard.add(GetString(
                           keyString: keyPress.text =

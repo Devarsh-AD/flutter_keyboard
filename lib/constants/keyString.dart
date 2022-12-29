@@ -54,6 +54,6 @@ List<String> lnFour = [
   '?',
 ];
 
-class CommomManager {
+class CommonManager {
   static bool isCapsLockOff = true;
 }

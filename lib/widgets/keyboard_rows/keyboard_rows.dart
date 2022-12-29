@@ -201,8 +201,8 @@ class _ThirdRowState extends State<ThirdRow> {
           flex: 10,
           child: GestureDetector(
             onTap: () => {
-              CommomManager.isCapsLockOff = !CommomManager.isCapsLockOff,
-              log('caaps ${CommomManager.isCapsLockOff}'),
+              CommonManager.isCapsLockOff = !CommonManager.isCapsLockOff,
+              log('caaps ${CommonManager.isCapsLockOff}'),
             },
             child: CustomKey(
               shouldVisible: true,
