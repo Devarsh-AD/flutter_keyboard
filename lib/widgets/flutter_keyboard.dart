@@ -13,23 +13,18 @@ class _FlutterKeyboardState extends State<FlutterKeyboard> {
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
-      Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Container(
-            color: Color.fromARGB(255, 85, 83, 83),
-            child: Column(
-              children: [
-                customSizedBox(5, 0),
-                firstRow(),
-                secondRow(),
-                thirdRow(),
-                fifthRow(),
-                sixthRow()
-              ],
-            ),
-          ),
-        ],
+      Container(
+        color: Color.fromARGB(255, 85, 83, 83),
+        child: Column(
+          children: [
+            customSizedBox(5, 0),
+            FirstRow(),
+            SecondRow(),
+            ThirdRow(),
+            FourthRow(),
+            FifthRow()
+          ],
+        ),
       ),
       Positioned(
           bottom: 100,

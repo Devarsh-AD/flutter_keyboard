@@ -4,7 +4,13 @@ import 'package:flut_keyboard/widgets/keys/key_with_raster.dart';
 import 'package:flut_keyboard/widgets/keys/keys.dart';
 import 'package:flutter/material.dart';
 
-Row sixthRow() {
+class FifthRow extends StatelessWidget {
+  const FifthRow({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -14,17 +20,18 @@ Row sixthRow() {
           customWidth: 50,
           keys: 'CTRL',
         ),
+      IconKeys(
+        shouldVisible: true,
+        customWidth: 30,
+        customHeight: 30,
+      ),
         CustomKey(
           shouldVisible: true,
           fSize: 15,
           customWidth: 40,
           keys: 'ALT',
         ),
-        IconKeys(
-          shouldVisible: true,
-          customWidth: 30,
-          customHeight: 30,
-        ),
+       
         CustomKey(
           shouldVisible: true,
           fSize: 15,
@@ -57,8 +64,15 @@ Row sixthRow() {
       ],
     );
   }
+}
 
-  Row fifthRow() {
+class FourthRow extends StatelessWidget {
+  const FourthRow({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
@@ -89,8 +103,15 @@ Row sixthRow() {
       ],
     );
   }
+}
 
-  Row firstRow() {
+class FirstRow extends StatelessWidget {
+  const FirstRow({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -103,8 +124,15 @@ Row sixthRow() {
       ],
     );
   }
+}
 
-  Row secondRow() {
+class SecondRow extends StatelessWidget {
+  const SecondRow({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
@@ -135,8 +163,15 @@ Row sixthRow() {
       ],
     );
   }
+}
 
-  Row thirdRow() {
+class ThirdRow extends StatelessWidget {
+  const ThirdRow({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
@@ -167,12 +202,16 @@ Row sixthRow() {
       ],
     );
   }
+}
 
   List<Widget> getKey(List<String> keys) {
     List<Widget> keyWidget = [];
     for (String i in keys) {
-      keyWidget.add(MyKey(
+    keyWidget.add(GestureDetector(
+      // onTap: () => getPressedKey(i),
+      child: MyKey(
         keys: i,
+      ),
       ));
     }
     return keyWidget;
