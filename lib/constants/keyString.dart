@@ -13,7 +13,6 @@ List<String> lnOne = [
   '-',
   '=',
   "\\",
-  '←'
 ];
 
 List<String> lnTwo = [
@@ -41,7 +40,7 @@ List<String> lnThree = [
   'K',
   'L',
   ';',
-  '`''',
+  '`' '',
 ];
 List<String> lnFour = [
   'Z',
@@ -54,3 +53,7 @@ List<String> lnFour = [
   '<',
   '?',
 ];
+
+class CommomManager {
+  static bool isCapsLock = false;
+}
