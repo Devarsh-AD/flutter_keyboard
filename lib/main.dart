@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 import 'package:flut_keyboard/Bloc/bloc/key_board_bloc.dart';
+import 'package:flut_keyboard/constants/keyString.dart';
 import 'package:flut_keyboard/widgets/flutter_keyboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -69,8 +70,17 @@ class _HomeState extends State<Home> {
         ),
         FlutterKeyboard(
             getPressedKey: (s) => {
-                  keyBoard.add(
-                      GetString(keyString: keyPress.text = keyPress.text + s))
+                  if (CommomManager.isCapsLockOff)
+                    {
+                      keyBoard.add(GetString(
+                          keyString: keyPress.text =
+                              keyPress.text + s.toLowerCase()))
+                    }
+                  else
+                    {
+                      keyBoard.add(GetString(
+                          keyString: keyPress.text = keyPress.text + s))
+                    }
                 })
       ],
     );

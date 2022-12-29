@@ -201,10 +201,8 @@ class _ThirdRowState extends State<ThirdRow> {
           flex: 10,
           child: GestureDetector(
             onTap: () => {
-              log('caaps ${CommomManager.isCapsLock}'),
-              !CommomManager.isCapsLock,
-              setState(() {}),
-              log('caaps ${CommomManager.isCapsLock}'),
+              CommomManager.isCapsLockOff = !CommomManager.isCapsLockOff,
+              log('caaps ${CommomManager.isCapsLockOff}'),
             },
             child: CustomKey(
               shouldVisible: true,
@@ -239,13 +237,7 @@ List<Widget> getKey(List<String> keys, Function(String) getPressedKey) {
   List<Widget> keyWidget = [];
   for (String i in keys) {
     keyWidget.add(GestureDetector(
-      onTap: () => {
-        log('caaps ${CommomManager.isCapsLock}'),
-        if (CommomManager.isCapsLock)
-          {getPressedKey(i)}
-        else
-          {getPressedKey(i.toLowerCase())}
-      },
+      onTap: () => getPressedKey(i),
       child: MyKey(
         keys: i,
       ),

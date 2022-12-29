@@ -55,5 +55,5 @@ List<String> lnFour = [
 ];
 
 class CommomManager {
-  static bool isCapsLock = false;
+  static bool isCapsLockOff = true;
 }
