@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider<KeyBoardBloc>(
       create: (context) => KeyBoardBloc(),
       child: MaterialApp(
-        title: 'Material App',
+        title: 'Flutter KeyBoard',
         home: Scaffold(
             appBar: AppBar(
               title: Text('Flutter KeyBoard'),
